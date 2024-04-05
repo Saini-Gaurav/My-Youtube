@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_API } from "../utils/constants";
 import VedioCard from "./VedioCard";
 import { Link } from "react-router-dom";
+import Shimmer from "./Shimmer";
 
 const VideoContainer = () => {
   const [vedios, setVedios] = useState([]);
@@ -15,6 +16,8 @@ const VideoContainer = () => {
     const json = await data.json();
     setVedios(json.items);
   };
+
+  if (!vedios.length) return <Shimmer />
   return (
     <div className="flex flex-wrap">
       {vedios.map((vedio) => (
