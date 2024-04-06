@@ -3,3 +3,19 @@ export const API_KEY = "AIzaSyCERZDyfPzmGEjhw2XtAYoTxzgYBw4zfy4"
 export const YOUTUBE_API = 'https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=60&regionCode=IN&key=' + API_KEY ;
 
 export const YOUTUBE_VIDEO_WATCH_API = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=${API_KEY}&id=`;
+
+export const btnList = [
+    "All",
+    "Gaming",
+    "Songs",
+    "Live",
+    "Cricket",
+    "News",
+    "Bollywood",
+    "Computer",
+    "Scene",
+    "Mixes",
+    "History",
+    "programming",
+    "Hollywood",
+  ];
