@@ -2,19 +2,45 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
-import { formatCompactNumber } from '../utils/helper';
+import { formatCompactNumber } from "../utils/helper";
+import { YOUTUBE_API, YOUTUBE_VIDEO_WATCH_API } from "../utils/constants";
+import likeIcon from '../assets/like.svg';
+import disLikeIcon from '../assets/dislike.svg';
+import shareIcon from '../assets/share.svg';
+import downloadIcon from '../assets/download.svg';
+import moreIcon from '../assets/more.svg';
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const [video, setVideo] = useState({});
+  const [relatedVideos, setRelatedVideos] = useState([]);
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const vedioId = searchParams.get("v");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(closeMenu());
+    window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    dispatch(closeMenu());
+    getVideoDetails();
+  }, []);
+
+  const getVideoDetails = async () => {
+    const data = await Promise.all([
+      fetch(YOUTUBE_VIDEO_WATCH_API + vedioId),
+      fetch(YOUTUBE_API),
+    ]);
+    const watchVideoJson = await data[0].json();
+    const recVideoJson = await data[1].json();
+    console.log(watchVideoJson);
+    setVideo(watchVideoJson?.items[0]);
+    setRelatedVideos(recVideoJson?.items);
+    console.log(relatedVideos);
+  };
+
   return (
     <div
       className={`${
@@ -56,6 +82,38 @@ const WatchPage = () => {
                 </div>
                 <button className="bg-black rounded-full px-4 ml-2 text-white">
                   Subscribe
+                </button>
+              </div>
+              <div className="flex">
+                <button className="bg-gray-100 rounded-l-full px-4 hover:bg-gray-200">
+                  <img alt="likeBtn" className="inline-block" src={likeIcon} />
+                  {formatCompactNumber(video?.statistics?.likeCount)}
+                </button>
+                <button className="bg-gray-100 rounded-r-full px-4 border-l-2 border-gray-300 hover:bg-gray-200">
+                  <img
+                    alt="dislikeBtn"
+                    className="inline-block"
+                    src={disLikeIcon}
+                  />
+                </button>
+                <button className="bg-gray-100 rounded-full px-4 ml-2 hover:bg-gray-200">
+                  <img
+                    alt="shareBtn"
+                    className="inline-block"
+                    src={shareIcon}
+                  />
+                  Share
+                </button>
+                <button className="bg-gray-100 rounded-full px-4 ml-2 hover:bg-gray-200">
+                  <img
+                    alt="downloadBtn"
+                    className="inline-block"
+                    src={downloadIcon}
+                  />
+                  Download
+                </button>
+                <button className="bg-gray-100 rounded-full w-10 h-10 ml-2 hover:bg-gray-200">
+                  <img alt="moreBtn" className="inline-block" src={moreIcon} />
                 </button>
               </div>
             </div>
