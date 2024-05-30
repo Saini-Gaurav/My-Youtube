@@ -19,3 +19,6 @@ export const btnList = [
     "programming",
     "Hollywood",
   ];
+
+  export const SEARCH_API = 'https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q='
+  export const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';

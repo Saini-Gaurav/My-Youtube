@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_API } from "../utils/constants";
-import VedioCard from "./VedioCard";
+import VedioCard, { AdVideoCard } from "./VedioCard";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { useSelector } from "react-redux";
@@ -23,6 +23,7 @@ const VideoContainer = () => {
   if (!vedios.length) return <Shimmer />
   return (
     <div className={`flex flex-wrap ${!isMenuOpen ? "" : "ml-[280px]"}`}>
+      {vedios[0] && <AdVideoCard info={vedios[0]}/>}
       {vedios.map((vedio) => (
         <Link key={vedio.id}  to={"/watch?v=" + vedio.id}>
           <VedioCard info={vedio} />

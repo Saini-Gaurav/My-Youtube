@@ -1,5 +1,6 @@
 import React from 'react'
 import { formatCompactNumber } from '../utils/helper';
+import VedioCard from './VedioCard'
 
 
 const VideoCard = ({ info }) => {
@@ -24,6 +25,17 @@ const VideoCard = ({ info }) => {
       </ul>
     </div>
   )
+};
+
+
+//This is called higher order component
+export const AdVideoCard = ({info})=>{
+  return (
+    <div className='p-1 m-1 border border-red-600'>
+      <VedioCard info={info} />
+    </div>
+  )
+
 }
 
 export default VideoCard
