@@ -37,21 +37,21 @@ const WatchPage = () => {
     ]);
     const watchVideoJson = await data[0].json();
     const relVideoJson = await data[1].json();
-    console.log(watchVideoJson);
+    // console.log(watchVideoJson);
     setVideo(watchVideoJson?.items[0]);
     setRelatedVideos(relVideoJson?.items);
-    console.log(relVideoJson);
+    // console.log(relVideoJson);
   };
 
   return (
     <div
       className={`${
-        !isMenuOpen ?"px-3 backdrop-blur-sm bg-white" : "ml-[280px]"
+        !isMenuOpen ?"px-3 backdrop-blur-sm bg-white" : "ml-[210px]"
       } col-span-10 pt-6 flex w-full mt-[10px] `}
     >
       <div className="flex-grow-6">
         <iframe
-          width="1000"
+          width="900"
           height="450"
           src={"https://www.youtube.com/embed/" + vedioId}
           title="YouTube video player"
