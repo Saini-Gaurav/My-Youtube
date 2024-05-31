@@ -20,5 +20,6 @@ export const btnList = [
     "Hollywood",
   ];
 
+  export const YOUTUBE_SEARCH_VIDEO_WITH_QUERY_API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&key=${API_KEY}&q=`;
   export const SEARCH_API = 'https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q='
-  export const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+  export const CORS_PROXY = 'https://corsproxy.io/?';

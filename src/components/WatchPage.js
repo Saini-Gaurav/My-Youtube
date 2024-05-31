@@ -9,6 +9,7 @@ import disLikeIcon from '../assets/dislike.svg';
 import shareIcon from '../assets/share.svg';
 import downloadIcon from '../assets/download.svg';
 import moreIcon from '../assets/more.svg';
+import CommentsContainer from "./CommentsContainer";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -44,7 +45,7 @@ const WatchPage = () => {
   return (
     <div
       className={`${
-        !isMenuOpen ? "px-20 " : "px-3 backdrop-blur-sm bg-white"
+        !isMenuOpen ?"px-3 backdrop-blur-sm bg-white" : "ml-[280px]"
       } col-span-10 pt-6 flex w-full mt-[10px] `}
     >
       <div className="flex-grow-6">
@@ -85,7 +86,7 @@ const WatchPage = () => {
                 </button>
               </div>
               <div className="flex">
-                <button className="bg-gray-100 rounded-l-full px-4 hover:bg-gray-200">
+                <button className="bg-gray-100 rounded-l-full px-2 hover:bg-gray-200">
                   <img alt="likeBtn" className="inline-block" src={likeIcon} />
                   {formatCompactNumber(video?.statistics?.likeCount)}
                 </button>
@@ -118,6 +119,9 @@ const WatchPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className='p-1 m-1'>
+          <CommentsContainer />
         </div>
       </div>
     </div>
