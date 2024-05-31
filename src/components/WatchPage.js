@@ -10,6 +10,7 @@ import shareIcon from '../assets/share.svg';
 import downloadIcon from '../assets/download.svg';
 import moreIcon from '../assets/more.svg';
 import CommentsContainer from "./CommentsContainer";
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -22,7 +23,7 @@ const WatchPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [vedioId]);
+  }, []);
 
   useEffect(() => {
     dispatch(closeMenu());
@@ -127,8 +128,9 @@ const WatchPage = () => {
       <div className='flex-grow-3'>
                 <div className='flex flex-col w-full'>
                     <div className='px-3 m-1 flex  w-full '>
-                        {/* <LiveChat /> */}
+                       <LiveChat />
                     </div>
+                    <div className="mt-[150px]">
                     {relatedVideos?.map(video =>
                         <Link key={video?.id} to={'/watch?v=' + video?.id} onClick={() => window.scroll(0,0)}>
                             <div className='px-3 m-2 mt-[20px] flex'>
@@ -141,6 +143,7 @@ const WatchPage = () => {
                             </div>
                          </Link>
                     )}
+                    </div>
                 </div>
             </div>
         </div>
