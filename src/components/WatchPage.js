@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { formatCompactNumber } from "../utils/helper";
 import { YOUTUBE_API, YOUTUBE_VIDEO_WATCH_API } from "../utils/constants";
 import likeIcon from '../assets/like.svg';
@@ -22,12 +22,12 @@ const WatchPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [vedioId]);
 
   useEffect(() => {
     dispatch(closeMenu());
     getVideoDetails();
-  }, []);
+  }, [vedioId]);
 
   const getVideoDetails = async () => {
     const data = await Promise.all([
@@ -35,11 +35,11 @@ const WatchPage = () => {
       fetch(YOUTUBE_API),
     ]);
     const watchVideoJson = await data[0].json();
-    const recVideoJson = await data[1].json();
+    const relVideoJson = await data[1].json();
     console.log(watchVideoJson);
     setVideo(watchVideoJson?.items[0]);
-    setRelatedVideos(recVideoJson?.items);
-    console.log(relatedVideos);
+    setRelatedVideos(relVideoJson?.items);
+    console.log(relVideoJson);
   };
 
   return (
@@ -76,7 +76,7 @@ const WatchPage = () => {
                       {video?.snippet?.channelTitle}
                     </div>
                     <div className="text-gray-500 text-[12px]">
-                      {formatCompactNumber(video?.statistics?.viewCount)}
+                      {formatCompactNumber(video?.statistics?.viewCount) + " "}
                       Subscriber
                     </div>
                   </div>
@@ -124,7 +124,26 @@ const WatchPage = () => {
           <CommentsContainer />
         </div>
       </div>
-    </div>
+      <div className='flex-grow-3'>
+                <div className='flex flex-col w-full'>
+                    <div className='px-3 m-1 flex  w-full '>
+                        {/* <LiveChat /> */}
+                    </div>
+                    {relatedVideos?.map(video =>
+                        <Link key={video?.id} to={'/watch?v=' + video?.id} onClick={() => window.scroll(0,0)}>
+                            <div className='px-3 m-2 mt-[20px] flex'>
+                                <img className='rounded-xl w-[168px] h-[94px] ' alt='thumbnail' src={video?.snippet?.thumbnails?.medium?.url} />
+                                <ul className='flex flex-col justify-start ml-2 w-60'>
+                                    <li className='font-medium py-2 text-[14px] line-clamp-2 max-h-[50px] leading-5'>{video?.snippet?.title}</li>
+                                    <li className='text-gray-500 text-[12px]'>{video?.snippet?.channelTitle}</li>
+                                    <li className='text-gray-500 text-[12px]'>{formatCompactNumber(video?.statistics?.viewCount)} -  {(Math.abs(new Date(video?.snippet?.publishedAt) - new Date()) / (60 * 60 * 24 * 1000)).toFixed(1)} days ago</li>
+                                </ul>
+                            </div>
+                         </Link>
+                    )}
+                </div>
+            </div>
+        </div>
   );
 };
 

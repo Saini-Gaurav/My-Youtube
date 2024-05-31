@@ -101,7 +101,7 @@ const Head = () => {
           <div className="w-10 h-10 hover:rounded-full hover:bg-gray-100 ml-5 cursor-pointer">
             <img className="mt-2 ml-2" alt="mick-icon " src={mikeIcon} />
           </div>
-          {searchQuery && <button onClick={() => setSearchQuery("")} className='absolute hover:bg-gray-200 hover:rounded-full w-9 h-9 right-[8.2rem] top-[2px]'>X</button>}
+          {searchQuery && <button onClick={() => setSearchQuery("")} className='absolute hover:bg-gray-200 hover:rounded-full w-9 h-9 right-[6.2rem] top-[2px]'>X</button>}
         </div>
         {showSuggestions && suggestions?.length > 0 && (
           <div className="absolute bg-white w-[560px] max-h-[400px] shadow-lg border rounded-lg overflow-y-auto left-3 top-10 z-50 text-left">
